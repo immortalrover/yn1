@@ -1,3 +1,6 @@
 [submodule "nvim"]
 	path = nvim
 	url = git@github.com:immortalrover/nvim.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:immortalrover/dotfiles.git
