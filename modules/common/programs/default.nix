@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    ./direnv.nix
     ./zsh.nix
   ];
   programs = {
