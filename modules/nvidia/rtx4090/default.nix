@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs-unstable, ... }:
 {
+  boot.kernelPackages = pkgs-unstable.linuxPackages;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -8,6 +8,6 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
+    package = (pkgs-unstable.linuxPackagesFor config.boot.kernelPackages.kernel).nvidiaPackages.stable;
   };
 }
