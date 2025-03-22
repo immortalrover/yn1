@@ -1,6 +1,7 @@
 { config, pkgs-unstable, ... }:
 {
   boot.kernelPackages = pkgs-unstable.linuxPackages;
+  hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;

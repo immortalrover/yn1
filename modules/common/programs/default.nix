@@ -44,6 +44,7 @@ in
       telegram-desktop
       sops
       ghostty
+      nodejs_23
     ]
     ++ [
       shell-gpt-litellm
