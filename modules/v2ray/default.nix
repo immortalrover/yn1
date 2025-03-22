@@ -76,25 +76,11 @@ in
                     }
                   ]
                 }
-              },
-              {
-                "protocol": "freedom",
-                "settings": {},
-                "tag": "direct"
               }
             ],
             "routing": {
               "balancingRule": [],
-              "domainStrategy": "IPOnDemand",
-              "rule": [
-                {
-                  "domain": [
-                    "localhost"
-                  ],
-                  "outboundTag": "direct",
-                  "type": "field"
-                }
-              ]
+              "domainStrategy": "AsIs"
             }
           }
         '';

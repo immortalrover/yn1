@@ -52,6 +52,7 @@
           ./modules/ollama
           ./modules/v2ray
           ./modules/vm
+          ./modules/steam
           ./users/${defaultUser}
           home-manager.nixosModules.home-manager
           {
