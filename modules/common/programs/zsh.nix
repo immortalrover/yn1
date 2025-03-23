@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+  imports = [ inputs.sops-nix.nixosModules.sops ];
+  sops.secrets.deepseek_api_key.owner = config.users.defaultUser;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -16,6 +18,10 @@
 
     interactiveShellInit = ''
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+    '';
+
+    shellInit = ''
+      export DEEPSEEK_API_KEY=$(cat ${config.sops.secrets.deepseek_api_key.path})
     '';
   };
 }
