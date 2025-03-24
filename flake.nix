@@ -34,16 +34,6 @@
       system = "x86_64-linux";
       # Default username
       defaultUser = "rover";
-      # Stable package set
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      # Unstable package set
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       # NixOS configuration for desktop system
@@ -51,7 +41,11 @@
         # Special arguments passed to modules
         specialArgs = {
           inherit inputs;
-          inherit pkgs-unstable;
+          # Unstable package set
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
         system = system;
         # List of modules to include in the configuration
@@ -68,11 +62,20 @@
           ./modules/vm
           ./modules/steam
           ./users/${defaultUser}
+          {
+            options.users.defaultUser = nixpkgs.lib.mkOption {
+              type = nixpkgs.lib.types.str;
+            };
+            config.users.defaultUser = defaultUser;
+          }
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${defaultUser} = import ./users/${defaultUser}/home.nix;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit defaultUser; };
+              users.${defaultUser} = import ./users/${defaultUser}/home.nix;
+            };
           }
         ];
       };
