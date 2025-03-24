@@ -1,12 +1,18 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  defaultUser,
+  ...
+}:
 let
   nvimPath = "${config.home.homeDirectory}/.nixos/nvim";
   zshPath = "${config.home.homeDirectory}/.nixos/dotfiles/.zshrc";
+  ghosttyPath = "${config.home.homeDirectory}/.nixos/dotfiles/ghostty";
 in
 {
   home = {
-    username = "rover";
-    homeDirectory = "/home/rover";
+    username = defaultUser;
+    homeDirectory = "/home/${defaultUser}";
     file.".zshrc".source = config.lib.file.mkOutOfStoreSymlink zshPath;
   };
 
@@ -15,6 +21,10 @@ in
     configFile = {
       "nvim" = {
         source = config.lib.file.mkOutOfStoreSymlink nvimPath;
+        recursive = true;
+      };
+      "ghostty" = {
+        source = config.lib.file.mkOutOfStoreSymlink ghosttyPath;
         recursive = true;
       };
     };
