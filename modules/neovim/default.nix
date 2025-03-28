@@ -8,6 +8,7 @@
     nil                  # Nix language server
     nixfmt-rfc-style     # Nix formatter following RFC style
     prettierd            # Prettier formatter daemon
+    emmet-language-server
   ];
   # Configure Neovim as the default editor
   programs.neovim = {

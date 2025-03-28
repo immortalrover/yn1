@@ -42,6 +42,7 @@ in
       vim
       wget
       git
+      git-lfs
 
       # System monitoring
       nvtopPackages.full
@@ -64,6 +65,9 @@ in
       sops
       ghostty
       nodejs_23
+      vscode
+
+      busybox
     ]
     ++ [
       # Custom shell-gpt package

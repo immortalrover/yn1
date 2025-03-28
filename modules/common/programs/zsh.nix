@@ -6,6 +6,7 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
   # Configure secret for deepseek API key
   sops.secrets.deepseek_api_key.owner = config.users.defaultUser;
+  sops.secrets.anthropic_api_key.owner = config.users.defaultUser;
   # ZSH program configuration
   programs.zsh = {
     # Enable ZSH shell
@@ -31,6 +32,7 @@
     # Shell initialization
     shellInit = ''
       export DEEPSEEK_API_KEY=$(cat ${config.sops.secrets.deepseek_api_key.path})
+      export ANTHROPIC_API_KEY=$(cat ${config.sops.secrets.anthropic_api_key.path})
     '';
   };
 }

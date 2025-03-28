@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  ollama = pkgs.ollama-cuda.overrideAttrs (
+    finalAttrs: previousAttrs: {
+      version = "0.6.2";
+    }
+  );
+in
 {
   # Configure Ollama service with CUDA acceleration
   services.ollama = {
@@ -15,7 +22,7 @@
       OLLAMA_ORIGINS = "*";
     };
     # Use CUDA-enabled Ollama package
-    package = pkgs.ollama-cuda;
+    package = ollama;
   };
   # Enable Next.js-based UI for Ollama LLM
   services.nextjs-ollama-llm-ui = {
